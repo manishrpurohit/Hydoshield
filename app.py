@@ -129,5 +129,7 @@ def api_predict():
         return jsonify({"error": "An unexpected error occurred processing your request."}), 500
 
 if __name__ == "__main__":
-    logger.info("Starting Flask application...")
-    app.run(debug=True, host="http://127.0.0.1:5000", port=5000)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    logger.info("Starting Flask application on port %d...", port)
+    app.run(debug=True, host="0.0.0.0", port=port)
