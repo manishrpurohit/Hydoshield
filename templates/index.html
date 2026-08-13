@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HydroShield | Water Safety Classification & Screening</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0f172a;
+      --primary-light: #1e293b;
+      --accent: #0ea5e9;
+      --accent-rgb: 14, 165, 233;
+      --accent-hover: #0284c7;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #334155;
+      --text-light: #64748b;
+      --text-dark: #0f172a;
+      --border: #e2e8f0;
+      
+      --safe: #10b981;
+      --safe-bg: #ecfdf5;
+      --safe-border: #a7f3d0;
+      
+      --unsafe: #ef4444;
+      --unsafe-bg: #fef2f2;
+      --unsafe-border: #fca5a5;
+      
+      --warning: #f59e0b;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    /* Navigation Header */
+    header {
+      background-color: var(--primary);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-md);
+      border-bottom: 1px solid var(--primary-light);
+    }
+
+    .nav-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: white;
+      text-decoration: none;
+    }
+
+    .brand-accent {
+      color: var(--accent);
+    }
+
+    .badge-model {
+      background-color: var(--primary-light);
+      color: var(--accent);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Main Content Layout */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 1024px) {
+      main {
+        grid-template-columns: 6fr 5fr;
+      }
+    }
+
+    /* Hero Section */
+    .hero-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 8px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      grid-column: 1 / -1;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-banner h1 {
+      color: white;
+      font-size: 2.2rem;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-banner p {
+      color: #cbd5e1;
+      max-width: 760px;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Preset Quick Controls */
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .preset-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-preset {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-preset:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+
+    .btn-preset.safe-preset {
+      border-color: var(--safe-border);
+    }
+    .btn-preset.safe-preset:hover {
+      background-color: var(--safe-bg);
+      color: var(--safe);
+    }
+
+    .btn-preset.unsafe-preset {
+      border-color: var(--unsafe-border);
+    }
+    .btn-preset.unsafe-preset:hover {
+      background-color: var(--unsafe-bg);
+      color: var(--unsafe);
+    }
+
+    /* Form Container */
+    .form-card {
+      background-color: var(--card-bg);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title h2 {
+      font-size: 1.4rem;
+    }
+
+    .category-group {
+      margin-bottom: 24px;
+    }
+
+    .category-header {
+      font-size: 1rem;
+      color: var(--text-light);
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .category-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Custom Inputs */
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .input-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-transform: capitalize;
+    }
+
+    .input-guideline {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .input-field-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-control {
+      width: 100%;
+      padding: 12px 14px;
+      padding-right: 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-dark);
+      background-color: var(--bg);
+      outline: none;
+    }
+
+    .input-control:focus {
+      border-color: var(--accent);
+      background-color: var(--card-bg);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+    }
+
+    .unit-suffix {
+      position: absolute;
+      right: 14px;
+      color: var(--text-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    /* Warning states for fields exceeding limits */
+    .input-wrapper.exceeded .input-control {
+      border-color: var(--warning-border);
+      background-color: var(--warning-bg);
+      padding-right: 56px;
+    }
+
+    .input-wrapper.exceeded .input-control:focus {
+      border-color: var(--warning);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+    }
+
+    .warning-icon {
+      position: absolute;
+      right: 48px;
+      display: none;
+      color: var(--warning);
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+    }
+
+    .input-wrapper.exceeded .warning-icon {
+      display: block;
+    }
+
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      flex: 1;
+    }
+
+    .btn-submit {
+      background-color: var(--accent);
+      color: white;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-submit:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+    }
+
+    .btn-clear {
+      background-color: var(--border);
+      color: var(--text);
+      flex: 0 0 120px;
+    }
+
+    .btn-clear:hover {
+      background-color: #cbd5e1;
+      color: var(--text-dark);
+    }
+
+    /* Prediction Result Panel */
+    .result-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .card-result {
+      background-color: var(--card-bg);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 380px;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-result.welcome-state {
+      background: radial-gradient(circle at top left, #f8fafc, #ffffff);
+    }
+
+    /* Radial Score Widget */
+    .gauge-wrapper {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      margin-bottom: 24px;
+    }
+
+    .gauge-svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .gauge-track {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 12;
+    }
+
+    .gauge-fill {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 502; /* 2 * PI * r (r=80) */
+      stroke-dashoffset: 502;
+      transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.5s;
+    }
+
+    .gauge-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gauge-percentage {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      font-family: 'Outfit', sans-serif;
+      line-height: 1;
+    }
+
+    .gauge-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* Status Badge styling */
+    .verdict-badge {
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .verdict-badge.safe-verdict {
+      background-color: var(--safe-bg);
+      color: var(--safe);
+      border: 1px solid var(--safe-border);
+    }
+
+    .verdict-badge.unsafe-verdict {
+      background-color: var(--unsafe-bg);
+      color: var(--unsafe);
+      border: 1px solid var(--unsafe-border);
+    }
+
+    .verdict-description {
+      font-size: 0.92rem;
+      color: var(--text-light);
+      max-width: 320px;
+      line-height: 1.5;
+    }
+
+    /* Details report of parameters exceeding */
+    .card-report {
+      background-color: var(--card-bg);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .card-report.active {
+      display: block;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .report-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .report-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .report-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background-color: var(--bg);
+      border-radius: 10px;
+      font-size: 0.875rem;
+      border-left: 4px solid var(--warning);
+    }
+
+    .report-item.danger {
+      border-left-color: var(--unsafe);
+    }
+
+    .report-param {
+      font-weight: 600;
+      color: var(--text-dark);
+      text-transform: capitalize;
+    }
+
+    .report-val-box {
+      text-align: right;
+    }
+
+    .report-current {
+      font-weight: 700;
+      color: var(--unsafe);
+    }
+
+    .report-limit {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      display: block;
+    }
+
+    /* Error Message Panel */
+    .error-panel {
+      background-color: var(--unsafe-bg);
+      border: 1px solid var(--unsafe-border);
+      color: var(--unsafe);
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <svg class="icon" style="width:24px; height:24px; color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"></path>
+        </svg>
+        <span>Hydro<span class="brand-accent">Shield</span></span>
+      </a>
+      <span class="badge-model">XGBoost Classifier v1.0</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h1>Optimized Water Safety Prediction</h1>
+      <p>This screening panel is simplified to use the 5 most critical features according to model feature importances. The other 15 secondary chemical/biological metrics are automatically filled with their dataset median values in the background to ensure reliable predictions without requesting extensive manual inputs.</p>
+    </section>
+
+    <!-- Left Column: Input Form -->
+    <section class="form-card">
+      <div class="section-title">
+        <svg class="icon" style="color:var(--accent); width:24px; height:24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <h2>Key Water Contaminants</h2>
+      </div>
+
+      <!-- Quick Preset Controls -->
+      <div class="preset-row">
+        <span class="preset-title">Test Presets:</span>
+        <button type="button" class="btn-preset safe-preset" id="load-safe">
+          <svg class="icon" style="width:16px; height:16px; color:var(--safe);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Load Safe Sample
+        </button>
+        <button type="button" class="btn-preset unsafe-preset" id="load-unsafe">
+          <svg class="icon" style="width:16px; height:16px; color:var(--unsafe);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          Load Unsafe Sample
+        </button>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-panel" id="error-message">
+        <svg class="icon" style="width:24px; height:24px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="error-text">Validation error message.</span>
+      </div>
+
+      <!-- Main Parameter Form -->
+      <form id="water-form">
+        
+        <div class="category-group">
+          <p class="category-header">
+            Enter concentration values for the 5 primary predictors. Hover/view guidelines to ensure parameters remain within safe environmental standards.
+          </p>
+          <div class="category-grid">
+            
+            <div class="input-wrapper" data-limit="0.005" data-name="cadmium">
+              <div class="label-row">
+                <label class="input-label" for="cadmium">Cadmium</label>
+                <span class="input-guideline">EPA limit: &le;0.005</span>
+              </div>
+              <div class="input-field-container">
+                <input class="input-control" type="number" step="any" min="0" max="1" name="cadmium" id="cadmium" required placeholder="0.00">
+                <span class="unit-suffix">mg/L</span>
+                <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+
+            <div class="input-wrapper" data-limit="0.2" data-name="aluminium">
+              <div class="label-row">
+                <label class="input-label" for="aluminium">Aluminium</label>
+                <span class="input-guideline">EPA limit: &le;0.2</span>
+              </div>
+              <div class="input-field-container">
+                <input class="input-control" type="number" step="any" min="0" max="10" name="aluminium" id="aluminium" required placeholder="0.00">
+                <span class="unit-suffix">mg/L</span>
+                <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+
+            <div class="input-wrapper" data-limit="0.1" data-name="silver">
+              <div class="label-row">
+                <label class="input-label" for="silver">Silver</label>
+                <span class="input-guideline">EPA limit: &le;0.10</span>
+              </div>
+              <div class="input-field-container">
+                <input class="input-control" type="number" step="any" min="0" max="1" name="silver" id="silver" required placeholder="0.00">
+                <span class="unit-suffix">mg/L</span>
+                <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+
+            <div class="input-wrapper" data-limit="15.0" data-name="perchlorate">
+              <div class="label-row">
+                <label class="input-label" for="perchlorate">Perchlorate</label>
+                <span class="input-guideline">EPA limit: &le;15</span>
+              </div>
+              <div class="input-field-container">
+                <input class="input-control" type="number" step="any" min="0" max="80" name="perchlorate" id="perchlorate" required placeholder="0.00">
+                <span class="unit-suffix">ug/L</span>
+                <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+
+            <div class="input-wrapper" data-limit="0.01" data-name="arsenic">
+              <div class="label-row">
+                <label class="input-label" for="arsenic">Arsenic</label>
+                <span class="input-guideline">WHO limit: &le;0.01</span>
+              </div>
+              <div class="input-field-container">
+                <input class="input-control" type="number" step="any" min="0" max="5" name="arsenic" id="arsenic" required placeholder="0.00">
+                <span class="unit-suffix">mg/L</span>
+                <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button class="btn btn-clear" type="button" id="btn-reset">Reset</button>
+          <button class="btn btn-submit" type="submit" id="btn-submit">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            Analyze Water
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Right Column: Results Dashboard -->
+    <section class="result-sidebar">
+      
+      <!-- Prediction Main Panel -->
+      <div class="card-result welcome-state" id="result-card">
+        
+        <!-- Welcome icon shown initially -->
+        <div id="welcome-graphic">
+          <svg style="width: 80px; height: 80px; color: var(--accent); opacity: 0.8; margin-bottom: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Ready for Screening</h3>
+          <p class="verdict-description">Enter the 5 water values on the left or load a test preset, then click "Analyze Water" to get an instant safety verdict.</p>
+        </div>
+
+        <!-- Hidden result state structure -->
+        <div id="result-view" style="display: none; align-items: center; flex-direction: column; width: 100%;">
+          <!-- Radial Progress -->
+          <div class="gauge-wrapper">
+            <svg class="gauge-svg" viewBox="0 0 180 180">
+              <circle class="gauge-track" cx="90" cy="90" r="80"></circle>
+              <circle class="gauge-fill" id="gauge-fill-ring" cx="90" cy="90" r="80"></circle>
+            </svg>
+            <div class="gauge-text">
+              <span class="gauge-percentage" id="score-percentage">0%</span>
+              <span class="gauge-label">Safe Prob</span>
+            </div>
+          </div>
+
+          <!-- Verdict Badge -->
+          <div class="verdict-badge" id="verdict-badge-box">
+            <svg class="icon" id="verdict-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></svg>
+            <span id="verdict-text">-</span>
+          </div>
+
+          <!-- Verdict Description -->
+          <p class="verdict-description" id="verdict-details-desc">
+            Calculation details will update here.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Guideline Deviations List -->
+      <div class="card-report" id="report-card">
+        <h3 class="report-title" id="report-header">
+          <svg class="icon" style="color:var(--warning);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Guideline Deviations
+        </h3>
+        <ul class="report-list" id="report-list-items">
+          <!-- Populated dynamically via JS -->
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>HydroShield Screening Platform &middot; Empowered by Scikit-Learn and XGBoost Pipeline</p>
+    <p style="font-size: 0.75rem; margin-top: 8px; color: var(--text-light);">Disclaimer: This screening tool provides predictions based on model probabilities. It should not be used as a final verification for public drinking water health safety.</p>
+  </footer>
+
+  <!-- Script for presets, dynamic highlighting, and AJAX predictions -->
+  <script>
+    // Preset Data mappings for the 5 displayed features
+    const presets = {
+      safe: {"cadmium": 0.007, "aluminium": 1.65, "silver": 0.34, "perchlorate": 37.75, "arsenic": 0.04},
+      unsafe: {"cadmium": 0.08, "aluminium": 1.01, "silver": 0.44, "perchlorate": 50.28, "arsenic": 0.04}
+    };
+
+    // DOM Elements
+    const form = document.getElementById('water-form');
+    const btnReset = document.getElementById('btn-reset');
+    const loadSafeBtn = document.getElementById('load-safe');
+    const loadUnsafeBtn = document.getElementById('load-unsafe');
+    const errorPanel = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    
+    const resultCard = document.getElementById('result-card');
+    const welcomeGraphic = document.getElementById('welcome-graphic');
+    const resultView = document.getElementById('result-view');
+    const scorePercentage = document.getElementById('score-percentage');
+    const gaugeFillRing = document.getElementById('gauge-fill-ring');
+    const verdictBadgeBox = document.getElementById('verdict-badge-box');
+    const verdictText = document.getElementById('verdict-text');
+    const verdictIcon = document.getElementById('verdict-icon');
+    const verdictDetailsDesc = document.getElementById('verdict-details-desc');
+    
+    const reportCard = document.getElementById('report-card');
+    const reportListItems = document.getElementById('report-list-items');
+    const reportHeader = document.getElementById('report-header');
+
+    // Populate inputs from a preset structure
+    function loadPreset(presetKey) {
+      const data = presets[presetKey];
+      if (!data) return;
+      
+      Object.keys(data).forEach(key => {
+        const input = document.getElementById(key);
+        if (input) {
+          input.value = data[key];
+          // Trigger validation update
+          validateField(input);
+        }
+      });
+      
+      // Hide error panel if active
+      errorPanel.style.display = 'none';
+      
+      // Highlight presets row briefly to show interaction
+      const presetBtn = presetKey === 'safe' ? loadSafeBtn : loadUnsafeBtn;
+      presetBtn.style.transform = 'scale(0.98)';
+      setTimeout(() => presetBtn.style.transform = 'none', 100);
+    }
+
+    // Single-field validation against limits
+    function validateField(input) {
+      const wrapper = input.closest('.input-wrapper');
+      if (!wrapper) return;
+      
+      const limit = parseFloat(wrapper.dataset.limit);
+      const val = parseFloat(input.value);
+      
+      if (!isNaN(val) && val > limit) {
+        wrapper.classList.add('exceeded');
+      } else {
+        wrapper.classList.remove('exceeded');
+      }
+    }
+
+    // Attach listeners to all numeric fields for real-time warning highlights
+    const inputs = document.querySelectorAll('.input-control');
+    inputs.forEach(input => {
+      ['input', 'change'].forEach(event => {
+        input.addEventListener(event, () => {
+          validateField(input);
+          updateGuidelinesReport();
+        });
+      });
+    });
+
+    // Update the visual deviations card based on active warnings
+    function updateGuidelinesReport() {
+      const exceededWrappers = document.querySelectorAll('.input-wrapper.exceeded');
+      
+      if (exceededWrappers.length === 0) {
+        reportCard.classList.remove('active');
+        return;
+      }
+
+      reportListItems.innerHTML = '';
+      let highestRiskContaminant = false;
+
+      exceededWrappers.forEach(wrap => {
+        const name = wrap.dataset.name;
+        const limit = parseFloat(wrap.dataset.limit);
+        const input = wrap.querySelector('.input-control');
+        const val = parseFloat(input.value);
+        const unit = wrap.querySelector('.unit-suffix').innerText;
+
+        // Certain elements are highly critical (cadmium, arsenic)
+        const isHighRisk = ['cadmium', 'arsenic'].includes(name);
+        if (isHighRisk) highestRiskContaminant = true;
+
+        const li = document.createElement('li');
+        li.className = `report-item ${isHighRisk ? 'danger' : ''}`;
+        li.innerHTML = `
+          <span class="report-param">${name.replace('_', ' ')}</span>
+          <div class="report-val-box">
+            <span class="report-current">${val} ${unit}</span>
+            <span class="report-limit">Limit: &le;${limit} ${unit}</span>
+          </div>
+        `;
+        reportListItems.appendChild(li);
+      });
+
+      // Update header color if severe elements are flagged
+      if (highestRiskContaminant) {
+        reportHeader.style.color = 'var(--unsafe)';
+      } else {
+        reportHeader.style.color = 'var(--warning)';
+      }
+
+      reportCard.classList.add('active');
+    }
+
+    // Reset layout
+    btnReset.addEventListener('click', () => {
+      form.reset();
+      inputs.forEach(input => {
+        const wrapper = input.closest('.input-wrapper');
+        if (wrapper) wrapper.classList.remove('exceeded');
+      });
+      errorPanel.style.display = 'none';
+      reportCard.classList.remove('active');
+      
+      // Reset result card to welcome state
+      resultCard.className = 'card-result welcome-state';
+      welcomeGraphic.style.display = 'block';
+      resultView.style.display = 'none';
+    });
+
+    // Preset listeners
+    loadSafeBtn.addEventListener('click', () => {
+      loadPreset('safe');
+      updateGuidelinesReport();
+    });
+    loadUnsafeBtn.addEventListener('click', () => {
+      loadPreset('unsafe');
+      updateGuidelinesReport();
+    });
+
+    // Form Submit handling (AJAX Fetch)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Hide error panel
+      errorPanel.style.display = 'none';
+      
+      // Disable submit button during processing
+      const submitBtn = document.getElementById('btn-submit');
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="icon animate-spin" style="animation: spin 1s linear infinite;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)"></circle>
+          <path d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z" fill="currentColor"></path>
+        </svg>
+        Analyzing...
+      `;
+
+      // Compile form data
+      const formData = new FormData(form);
+      
+      try {
+        const response = await fetch('/api/predict', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Server returned an error.');
+        }
+
+        // Show Results
+        displayResult(data);
+      } catch (err) {
+        console.error(err);
+        errorText.innerText = err.message || 'An unexpected error occurred.';
+        errorPanel.style.display = 'flex';
+        errorPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
+    });
+
+    // Render prediction response inside result sidebar
+    function displayResult(result) {
+      // Toggle welcome state off
+      welcomeGraphic.style.display = 'none';
+      resultView.style.display = 'flex';
+      resultCard.classList.remove('welcome-state');
+
+      // Update probability score
+      const prob = result.probability;
+      scorePercentage.innerText = `${prob}%`;
+
+      // Animate Radial Ring
+      const circumference = 502;
+      const offset = circumference - (prob / 100) * circumference;
+      gaugeFillRing.style.strokeDashoffset = offset;
+
+      // Update Colors and Verdict Card based on Safety status
+      if (result.is_safe) {
+        resultCard.style.border = '2px solid var(--safe-border)';
+        gaugeFillRing.style.stroke = 'var(--safe)';
+        
+        verdictBadgeBox.className = 'verdict-badge safe-verdict';
+        verdictText.innerText = 'Safe to Drink';
+        verdictIcon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+        
+        verdictDetailsDesc.innerHTML = `Model predicts high confidence (<strong>${prob}% probability</strong>) that this chemical composition is safe for normal drinking water supply.`;
+      } else {
+        resultCard.style.border = '2px solid var(--unsafe-border)';
+        gaugeFillRing.style.stroke = 'var(--unsafe)';
+        
+        verdictBadgeBox.className = 'verdict-badge unsafe-verdict';
+        verdictText.innerText = 'Not Safe';
+        verdictIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+        
+        verdictDetailsDesc.innerHTML = `Warning: Model indicates <strong>${(100 - prob).toFixed(2)}% probability of contamination</strong>. Check flagged parameters below for safety violations.`;
+      }
+
+      // Smooth scroll result panel on mobile viewports
+      if (window.innerWidth < 1024) {
+        resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  </script>
+
+  <!-- Spin Animation Styles -->
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</body>
+</html>
